@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  jdownloader-exporter:
+    image: jdownloader-exporter:latest
+    restart: always
+    container_name: jdownloader-exporter
+    ports:
+      - "8008:8008"
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true
