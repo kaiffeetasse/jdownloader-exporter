@@ -43,6 +43,12 @@ def export_metrics():
         ["device_name"]
     )
 
+    total_bytes_in_linkgrabber_gauge = Gauge(
+        "jdownloader_total_bytes_in_linkgrabber",
+        "Total Bytes in linkgrabber",
+        ["device_name"]
+    )
+
     total_bytes_downloaded_gauge = Gauge(
         "jdownloader_total_bytes_downloaded",
         "Total Bytes Downloaded",
@@ -81,10 +87,11 @@ def export_metrics():
 
                     download_packages = device.downloads.query_packages()
                     download_links = device.downloads.query_links()
+                    linkgrabber_packages = device.linkgrabber.query_packages()
 
                     # current download speed
                     download_speed = device.downloadcontroller.get_speed_in_bytes()
-                    logger.info("download speed: " + str(download_speed) + "bps")
+                    logger.info("download speed: " + str(download_speed) + " bps")
                     download_speed_gauge.labels(device.name).set(download_speed)
 
                     # downloads package count
@@ -97,12 +104,19 @@ def export_metrics():
                     logger.info("linkgrabber package count: " + str(linkgrabber_package_count))
                     linkgrabber_package_count_gauge.labels(device.name).set(linkgrabber_package_count)
 
-                    # total bytes to download
+                    # total bytes in downloads
                     total_bytes_to_download = 0
                     for download_package in download_packages:
                         total_bytes_to_download += download_package['bytesTotal']
                     logger.info("total bytes to download: " + str(total_bytes_to_download))
                     total_bytes_to_download_gauge.labels(device.name).set(total_bytes_to_download)
+
+                    # total bytes in linkgrabber
+                    total_bytes_to_download_linkgrabber = 0
+                    for linkgrabber_package in linkgrabber_packages:
+                        total_bytes_to_download_linkgrabber += linkgrabber_package['bytesTotal']
+                    logger.info("total bytes in linkgrabber: " + str(total_bytes_to_download_linkgrabber))
+                    total_bytes_in_linkgrabber_gauge.labels(device.name).set(total_bytes_to_download_linkgrabber)
 
                     # total bytes downloaded
                     total_bytes_downloaded = 0
