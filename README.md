@@ -1,7 +1,7 @@
 JDownloader Exporter
 ====================
 
-A Prometheus exporter for exporting JDownloader metrics.
+A Prometheus exporter for exporting JDownloader metrics. In order to use this exporter, you need to install the [JDownloader](https://jdownloader.org) client and connect your My.JDownloader account in the settings.
 
 ## Metrics
 
