@@ -1,9 +1,22 @@
 JDownloader Exporter
 ====================
 
-A Prometheus exporter for exporting JDownloader metrics. In order to use this exporter, you need to install the [JDownloader](https://jdownloader.org) client and connect your My.JDownloader account in the settings.
+A Prometheus exporter for exporting JDownloader metrics. In order to use this exporter, you need to install
+the [JDownloader](https://jdownloader.org) client and connect your My.JDownloader account in the settings.
 
 ## Metrics
+
+Currently, the following metrics are exported:
+
+* `jdownloader_download_speed` - The current download speed in bytes per second.
+* `jdownloader_download_package_count` - The number of packages currently in the download queue.
+* `jdownloader_linkgrabber_package_count` - The number of packages currently in the linkgrabber queue.
+* `jdownloader_total_bytes_to_download` - The total number of bytes to download.
+* `jdownloader_total_bytes_in_linkgrabber` - The total number of bytes in the linkgrabber queue.
+* `jdownloader_total_bytes_downloaded` - The total number of bytes downloaded.
+* `jdownloader_running_downloads` - The number of running downloads.
+
+#### Prometheus Metrics
 
 ```
 # HELP jdownloader_download_speed Download Speed in bps
