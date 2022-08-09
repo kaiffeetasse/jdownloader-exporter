@@ -15,8 +15,7 @@ logger = logging.getLogger(__name__)
 
 MYJD_USERNAME = os.environ.get("MYJD_USERNAME")
 MYJD_PASSWORD = os.environ.get("MYJD_PASSWORD")
-
-EXPORT_INTERVAL_SECONDS = 60
+EXPORT_INTERVAL_SECONDS = int(os.environ.get("EXPORT_INTERVAL_SECONDS"))
 
 
 def export_metrics():
